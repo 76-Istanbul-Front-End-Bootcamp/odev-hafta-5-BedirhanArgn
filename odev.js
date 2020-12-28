@@ -33,4 +33,50 @@ document.querySelector("#reset").addEventListener("click", () => {
 
 /* START CODING HERE */
 
+populationBigger.addEventListener("click",()=>{
+  const newData=data.filter((item)=>{
+    return item.population>500000;
+  });
+  createTableElements(newData,"allcities");
+});
 
+landAreaLess.addEventListener("click",()=>{
+  const nData=data.filter(item=>item.landArea<1000);
+  createTableElements(nData,"allcities");
+})
+
+isPopulationLess.addEventListener("click",()=>{
+  const manipulatedData=data.some(item=>item.population<100000);
+  if(manipulatedData===true) {
+    alert("Var");
+  }
+  else {
+    alert("Yok");
+  }
+
+})
+
+isLandBigger.addEventListener("click",()=>{
+  const manipulatedData2=data.every(item=>item.landArea>100);
+  if(manipulatedData2===true) {
+    alert("Var");
+  }
+  else {
+    alert("Yok");
+  }
+});
+
+let inputSelect=document.getElementById("inputGroupSelect01");
+inputSelect.options.length = 0;
+    inputSelect.options[0] = new Option("Seçim yapınız", 0);
+data.forEach((item,i)=>{
+    inputSelect.options[i+1] = new Option(item.name, i);
+});
+
+inputGroupSelect01.addEventListener("change",()=>{
+  const data3=data.filter((item,i)=>{
+    return item.name==inputSelect.options[inputSelect.selectedIndex].text;
+  })
+  createTableElements(data3,"singlecity");
+
+})
